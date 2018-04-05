@@ -43,4 +43,24 @@ describe('arguments-as-string', () => {
     const result = argumentsAsString(1, 2, 3, 4, 5, 6)
     expect(result).toMatchSnapshot()
   })
+
+  it('works with functions', () => {
+    // in "normal" function you have arguments
+    function main() {
+      return argumentsAsString(...arguments)
+    }
+    const result = main(42, 'foo', {name: 'bar'})
+    expect(result).toMatchSnapshot()
+  })
+
+  it('works with fat arrows', () => {
+    // in fat arrow functional expressions you
+    // don't have "arguments", so you need to grab arguments
+    // right away
+    const main = (...args) => {
+      return argumentsAsString(...args)
+    }
+    const result = main(42, 'foo', {name: 'bar'})
+    expect(result).toMatchSnapshot()
+  })
 })

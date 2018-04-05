@@ -19,6 +19,26 @@ npm install --save arguments-as-string
 
 ## Use
 
+Whenever you want to serialize all arguments for a function
+
+```js
+const a2s = require('arguments-as-string')
+function main() {
+  // in "normal" function you have arguments
+  console.log(a2s(...arguments))
+}
+const foo = (...args) => {
+  // in fat arrow functional expressions you
+  // don't have "arguments", so you need to grab arguments
+  // right away
+  console.log(a2s(...args))
+}
+main(1, 'foo', 2)
+// "1 foo 2"
+foo('foo', 'bar', 33)
+// "foo bar 33"
+```
+
 ### Small print
 
 Author: Gleb Bahmutov &lt;gleb.bahmutov@gmail.com&gt; &copy; 2018
