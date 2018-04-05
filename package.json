@@ -1,7 +1,7 @@
 {
   "name": "arguments-as-string",
   "description": "Converts passed arguments into a user-friendly string",
-  "version": "1.0.0",
+  "version": "0.0.0-development",
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "bugs": "https://github.com/bahmutov/arguments-as-string/issues",
   "config": {
@@ -74,7 +74,9 @@
     "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";",
     "test": "npm run unit",
     "unit": "jest",
-    "unused-deps": "dependency-check --unused --no-dev ."
+    "unused-deps": "dependency-check --unused --no-dev .",
+    "semantic-release": "semantic-release",
+    "travis-deploy-once": "travis-deploy-once"
   },
   "devDependencies": {
     "ban-sensitive-files": "1.9.2",
@@ -86,6 +88,8 @@
     "nsp": "3.2.1",
     "pre-git": "3.17.1",
     "prettier-standard": "8.0.0",
-    "standard": "11.0.1"
+    "standard": "11.0.1",
+    "semantic-release": "^15.1.5",
+    "travis-deploy-once": "^4.4.1"
   }
 }
