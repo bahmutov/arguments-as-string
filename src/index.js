@@ -5,13 +5,8 @@ function isArrayLike (a) {
 }
 
 function toStringArray (arr) {
-  return (
-    'array with ' +
-    arr.length +
-    ' items.\n[' +
-    arr.map(toString).join(',') +
-    ']\n'
-  )
+  return `array with ${arr.length} items.\n[${arr.map(toString).join(', ')}]
+`
 }
 
 function isPrimitive (arg) {
@@ -33,16 +28,16 @@ function isPrimitive (arg) {
   // this replacer returns '{"foo": 42, "bar": null}'
 */
 function replacer (key, value) {
-  if (value === undefined) {
-    return null
-  }
-  return value
+  return value === undefined ? null : value
 }
 
 function toString (arg, k) {
+  let argString
+
   if (isPrimitive(arg)) {
     return JSON.stringify(arg)
   }
+
   if (arg instanceof Error) {
     return arg.name + ' ' + arg.message
   }
@@ -50,21 +45,21 @@ function toString (arg, k) {
   if (Array.isArray(arg)) {
     return toStringArray(arg)
   }
+
   if (isArrayLike(arg)) {
-    return toStringArray(Array.prototype.slice.call(arg, 0))
+    return toStringArray(Array.from(arg))
   }
-  var argString
+
   try {
     argString = JSON.stringify(arg, replacer, 2)
   } catch (err) {
-    argString =
-      '{ cannot stringify arg ' + k + ', it has type "' + typeof arg + '"'
+    argString = `{ cannot stringify arg ${k}, it has type "${typeof arg}"`
     if (typeof arg === 'object') {
-      argString += ' with keys ' + Object.keys(arg).join(', ') + ' }'
-    } else {
-      argString += ' }'
+      argString += ` with keys ${Object.keys(arg).join(', ')}`
     }
+    argString += ' }'
   }
+
   return argString
 }
 
@@ -87,22 +82,29 @@ function argumentsAsString (...args) {
     if (k && !endsWithNewLine(total)) {
       total += ' '
     }
+  
     if (typeof arg === 'string') {
       return total + arg
     }
+  
     if (typeof arg === 'function') {
       var fnResult
+
       try {
         fnResult = arg()
       } catch (err) {
         // ignore the error
-        fnResult = '[function ' + arg.name + ' threw error!]'
+        fnResult = `[function ${arg.name} threw error!]`
       }
+
       return total + fnResult
     }
+
     const argString = toString(arg, k)
+
     return total + argString
   }, '')
+
   return msg
 }
 
