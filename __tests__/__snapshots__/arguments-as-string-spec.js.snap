@@ -22,6 +22,8 @@ exports[`arguments-as-string handles circular references 1`] = `
 
 exports[`arguments-as-string handles numbers 1`] = `"1 2 3 4 5 6"`;
 
+exports[`arguments-as-string works with empty arguments 1`] = `"[]"`;
+
 exports[`arguments-as-string works with fat arrows 1`] = `
 "42 foo {
   \\"name\\": \\"bar\\"

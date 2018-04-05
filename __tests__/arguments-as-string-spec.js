@@ -63,4 +63,9 @@ describe('arguments-as-string', () => {
     const result = main(42, 'foo', {name: 'bar'})
     expect(result).toMatchSnapshot()
   })
+
+  it('works with empty arguments', () => {
+    const result = argumentsAsString()
+    expect(result).toMatchSnapshot()
+  })
 })

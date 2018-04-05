@@ -79,7 +79,11 @@ function endsWithNewLine (s) {
  * @returns {string}
  */
 function argumentsAsString (...args) {
-  var msg = args.reduce(function (total, arg, k) {
+  if (args.length === 0) {
+    return '[]'
+  }
+
+  const msg = args.reduce(function (total, arg, k) {
     if (k && !endsWithNewLine(total)) {
       total += ' '
     }
@@ -96,7 +100,7 @@ function argumentsAsString (...args) {
       }
       return total + fnResult
     }
-    var argString = toString(arg, k)
+    const argString = toString(arg, k)
     return total + argString
   }, '')
   return msg
