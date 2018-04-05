@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`arguments-as-string forms a string from strings and numbers 1`] = `"foo bar 42 the last argument"`;
+
+exports[`arguments-as-string forms string from objects 1`] = `
+"{
+  \\"foo\\": {
+    \\"bar\\": 42
+  }
+} {
+  \\"name\\": \\"Joe\\"
+}"
+`;
+
+exports[`arguments-as-string handles circular references 1`] = `
+"{
+  \\"foo\\": {
+    \\"bar\\": 42
+  }
+} { cannot stringify arg 1, it has type \\"object\\" with keys name, ref }"
+`;
+
+exports[`arguments-as-string handles numbers 1`] = `"1 2 3 4 5 6"`;
